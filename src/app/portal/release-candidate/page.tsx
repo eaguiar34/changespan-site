@@ -18,10 +18,10 @@ export default async function ReleaseCandidatePage() {
       </div>
 
       <div>
-        <p className="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">Core Workflow</p>
-        <h1 className="mt-2 text-4xl font-bold tracking-tight text-slate-950">Packages as the canonical record</h1>
+        <p className="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">Canonical Workflow</p>
+        <h1 className="mt-2 text-4xl font-bold tracking-tight text-slate-950">Release candidate packages</h1>
         <p className="mt-3 max-w-3xl text-slate-600">
-          CPM, cost, RFIs, and spec/submittal matching feed one package core instead of fragmenting the workflow.
+          CPM, cost, RFIs, and spec/submittal matching should converge into this package core instead of fragmenting the workflow.
         </p>
       </div>
 
@@ -47,7 +47,7 @@ export default async function ReleaseCandidatePage() {
       </section>
 
       <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-        <h2 className="text-xl font-semibold text-slate-950">Canonical package list</h2>
+        <h2 className="text-xl font-semibold text-slate-950">Package list</h2>
         <div className="mt-4 overflow-x-auto">
           <table className="min-w-full text-sm">
             <thead className="text-left text-slate-500">

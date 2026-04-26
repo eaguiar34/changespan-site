@@ -6,52 +6,6 @@ async function apiGet<T>(path: string): Promise<T> {
   return response.json();
 }
 
-async function apiPost<T>(path: string, payload: unknown): Promise<T> {
-  const response = await fetch(`${API_BASE}${path}`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload),
-  });
-  if (!response.ok) throw new Error(`API request failed: ${response.status}`);
-  return response.json();
-}
-
-export async function login(email: string, password: string) {
-  const attempts: Array<() => Promise<any>> = [
-    () => apiPost("/auth/login", { email, password }),
-    () => apiPost("/auth/token", { username: email, password }),
-    () => apiGet("/auth/dev-tokens"),
-  ];
-
-  for (const attempt of attempts) {
-    try {
-      const data = await attempt();
-      if (Array.isArray(data) && data.length > 0) {
-        const first = data[0];
-        return {
-          access_token: first.token || first.access_token || "dev-token",
-          token_type: "bearer",
-          user: first.user || { email, role: "admin", name: "Dev User" },
-        };
-      }
-      if (data && (data.access_token || data.token)) {
-        return {
-          access_token: data.access_token || data.token,
-          token_type: data.token_type || "bearer",
-          user: data.user || { email, role: "admin", name: "Dev User" },
-        };
-      }
-    } catch {
-    }
-  }
-
-  return {
-    access_token: "dev-local-token",
-    token_type: "bearer",
-    user: { email, role: "admin", name: "Local Dev User" },
-  };
-}
-
 export async function getPlatformVersion() {
   return apiGet<any>("/version");
 }
